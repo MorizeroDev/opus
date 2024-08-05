@@ -10,7 +10,7 @@ add_definitions(-DHAVE_CONFIG_H)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-if(MSVC)
+if(NOT MSVC_CL)
   # For compilers that have no notion of a C standard level,
   # such as Microsoft Visual C++ before VS 16.7,
   # this property has no effect.
@@ -19,7 +19,7 @@ else()
   set(CMAKE_C_STANDARD 99)
 endif()
 
-if(MSVC)
+if(NOT MSVC_CL)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
@@ -80,7 +80,7 @@ elseif(OPUS_CPU_ARM AND NOT OPUS_DISABLE_INTRINSICS)
   endif()
 endif()
 
-if(MSVC)
+if(NOT MSVC_CL)
   check_flag(FAST_MATH /fp:fast)
   check_flag(STACK_PROTECTOR /GS)
   check_flag(STACK_PROTECTOR_DISABLED /GS-)
@@ -102,7 +102,7 @@ if(MINGW)
   endif()
 endif()
 
-if(MSVC)
+if(NOT MSVC_CL)
   # move cosmetic warnings to level 4
   add_compile_options(/w44244 /w44305 /w44267)
 else()
